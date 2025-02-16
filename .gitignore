@@ -1,0 +1,37 @@
+# Ignore files and directories
+.sln
+.sln.docstates
+Thumbs.db
+ehthumbs.db
+*.exe
+*.dll
+*.ocx
+*.sys
+*.tmp
+*.bak
+
+# Ignore Rust project files
+Cargo.toml
+
+# Ignore build artifacts
+.duc
+rustc-stderr.rst
+
+# Ignore node.js project files (if you're using Cargo as a npm-like package manager)
+.npm/
+
+# Ignore Visual Studio project files
+*.suo
+*.userosscache
+
+# Ignore temporary files
+TMP/
+Temp/
+
+# Ignore all subdirectories within the root directory
+*/target/*
+*/lib/
+*/.idea/
+*/.vscode/
+*/.exercism/
+*/Cargo.lock
