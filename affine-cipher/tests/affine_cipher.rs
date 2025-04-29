@@ -12,7 +12,6 @@ fn encode_yes() {
 }
 
 #[test]
-#[ignore]
 fn encode_no() {
     let phrase = "no";
     let (a, b) = (15, 18);
@@ -22,7 +21,6 @@ fn encode_no() {
 }
 
 #[test]
-#[ignore]
 fn encode_omg() {
     let phrase = "OMG";
     let (a, b) = (21, 3);
@@ -32,7 +30,6 @@ fn encode_omg() {
 }
 
 #[test]
-#[ignore]
 fn encode_o_m_g() {
     let phrase = "O M G";
     let (a, b) = (25, 47);
@@ -42,7 +39,6 @@ fn encode_o_m_g() {
 }
 
 #[test]
-#[ignore]
 fn encode_mindblowingly() {
     let phrase = "mindblowingly";
     let (a, b) = (11, 15);
@@ -52,7 +48,6 @@ fn encode_mindblowingly() {
 }
 
 #[test]
-#[ignore]
 fn encode_numbers() {
     let phrase = "Testing,1 2 3, testing.";
     let (a, b) = (3, 4);
@@ -62,7 +57,6 @@ fn encode_numbers() {
 }
 
 #[test]
-#[ignore]
 fn encode_deep_thought() {
     let phrase = "Truth is fiction.";
     let (a, b) = (5, 17);
@@ -72,7 +66,6 @@ fn encode_deep_thought() {
 }
 
 #[test]
-#[ignore]
 fn encode_all_the_letters() {
     let phrase = "The quick brown fox jumps over the lazy dog.";
     let (a, b) = (17, 33);
@@ -82,7 +75,6 @@ fn encode_all_the_letters() {
 }
 
 #[test]
-#[ignore]
 fn encode_with_a_not_coprime_to_m() {
     let phrase = "This is a test.";
     let (a, b) = (6, 17);
@@ -92,7 +84,6 @@ fn encode_with_a_not_coprime_to_m() {
 }
 
 #[test]
-#[ignore]
 fn decode_exercism() {
     let phrase = "tytgn fjr";
     let (a, b) = (3, 7);
@@ -102,7 +93,6 @@ fn decode_exercism() {
 }
 
 #[test]
-#[ignore]
 fn decode_a_sentence() {
     let phrase = "qdwju nqcro muwhn odqun oppmd aunwd o";
     let (a, b) = (19, 16);
@@ -112,7 +102,6 @@ fn decode_a_sentence() {
 }
 
 #[test]
-#[ignore]
 fn decode_numbers() {
     let phrase = "odpoz ub123 odpoz ub";
     let (a, b) = (25, 7);
@@ -122,7 +111,6 @@ fn decode_numbers() {
 }
 
 #[test]
-#[ignore]
 fn decode_all_the_letters() {
     let phrase = "swxtj npvyk lruol iejdc blaxk swxmh qzglf";
     let (a, b) = (17, 33);
@@ -132,7 +120,6 @@ fn decode_all_the_letters() {
 }
 
 #[test]
-#[ignore]
 fn decode_with_no_spaces_in_input() {
     let phrase = "swxtjnpvyklruoliejdcblaxkswxmhqzglf";
     let (a, b) = (17, 33);
@@ -142,7 +129,6 @@ fn decode_with_no_spaces_in_input() {
 }
 
 #[test]
-#[ignore]
 fn decode_with_too_many_spaces() {
     let phrase = "vszzm    cly   yd cg    qdp";
     let (a, b) = (15, 16);
@@ -152,7 +138,6 @@ fn decode_with_too_many_spaces() {
 }
 
 #[test]
-#[ignore]
 fn decode_with_a_not_coprime_to_m() {
     let phrase = "Test";
     let (a, b) = (13, 5);
