@@ -1,11 +1,30 @@
+use rayon::prelude::*;
 use std::collections::HashMap;
 
-pub fn frequency(input: &[&str], worker_count: usize) -> HashMap<char, usize> {
-    todo!(
-        "Count the frequency of letters in the given input '{input:?}'. Ensure that you are using {} to process the input.",
-        match worker_count {
-            1 => "1 worker".to_string(),
-            _ => format!("{worker_count} workers"),
-        }
-    );
+pub fn frequency(input: &[&str], _worker_count: usize) -> HashMap<char, usize> {
+    if input.is_empty() {
+        return HashMap::new();
+    }
+
+    input
+        .par_iter()
+        .map(|text| {
+            let mut local_counts: HashMap<char, usize> = HashMap::new();
+            for c in text.chars() {
+                let lower_c = c.to_lowercase().next().unwrap();
+                if lower_c.is_alphabetic() {
+                    *local_counts.entry(lower_c).or_insert(0) += 1;
+                }
+            }
+            local_counts
+        })
+        .reduce(
+            || HashMap::new(),
+            |mut acc, local_counts| {
+                for (char, count) in local_counts {
+                    *acc.entry(char).or_insert(0) += count;
+                }
+                acc
+            },
+        )
 }
