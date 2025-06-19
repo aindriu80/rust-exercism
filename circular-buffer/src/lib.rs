@@ -1,7 +1,12 @@
-pub struct CircularBuffer<T> {
-    // We fake using T here, so the compiler does not complain that
-    // "parameter `T` is never used". Delete when no longer needed.
-    phantom: std::marker::PhantomData<T>,
+use std::marker::PhantomData;
+
+pub struct CircularBuffer<T: Clone> {
+    buffer: Vec<Option<T>>,
+    head: usize,
+    tail: usize,
+    size: usize,
+    capacity: usize,
+    phantom: PhantomData<T>,
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -10,36 +15,57 @@ pub enum Error {
     FullBuffer,
 }
 
-impl<T> CircularBuffer<T> {
+impl<T: Clone> CircularBuffer<T> {
     pub fn new(capacity: usize) -> Self {
-        todo!(
-            "Construct a new CircularBuffer with the capacity to hold {}.",
-            match capacity {
-                1 => "1 element".to_string(),
-                _ => format!("{capacity} elements"),
-            }
-        );
+        CircularBuffer {
+            buffer: vec![None; capacity],
+            head: 0,
+            tail: 0,
+            size: 0,
+            capacity,
+            phantom: PhantomData,
+        }
     }
 
     pub fn write(&mut self, _element: T) -> Result<(), Error> {
-        todo!(
-            "Write the passed element to the CircularBuffer or return FullBuffer error if CircularBuffer is full."
-        );
+        if self.size == self.capacity {
+            return Err(Error::FullBuffer);
+        }
+        self.buffer[self.tail] = Some(_element);
+        self.tail = (self.tail + 1) % self.capacity;
+        self.size += 1;
+
+        Ok(())
     }
 
     pub fn read(&mut self) -> Result<T, Error> {
-        todo!(
-            "Read the oldest element from the CircularBuffer or return EmptyBuffer error if CircularBuffer is empty."
-        );
+        if self.size == 0 {
+            return Err(Error::EmptyBuffer);
+        }
+
+        let element = self.buffer[self.head].take().unwrap();
+        self.head = (self.head + 1) % self.capacity;
+        self.size -= 1;
+
+        Ok(element)
     }
 
     pub fn clear(&mut self) {
-        todo!("Clear the CircularBuffer.");
+        self.buffer.clear();
+        self.buffer.resize(self.capacity, None);
+        self.head = 0;
+        self.tail = 0;
+        self.size = 0;
     }
 
-    pub fn overwrite(&mut self, _element: T) {
-        todo!(
-            "Write the passed element to the CircularBuffer, overwriting the existing elements if CircularBuffer is full."
-        );
+    pub fn overwrite(&mut self, element: T) {
+        self.buffer[self.tail] = Some(element);
+        self.tail = (self.tail + 1) % self.capacity;
+        if self.size == self.capacity {
+            self.head = (self.head + 1) % self.capacity;
+            self.size = self.capacity;
+        } else {
+            self.size += 1;
+        }
     }
 }
